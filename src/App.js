@@ -43,7 +43,7 @@ function App() {
         <Route 
           path="/" 
           element={
-            <Login isRedirect={getMetadata}/>
+            <Login/>
           } 
         />
         <Route 

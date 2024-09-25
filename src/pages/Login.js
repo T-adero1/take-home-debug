@@ -18,11 +18,11 @@ const Login = () => {
 
   const handleSocialLogin = useCallback(async (provider) => {
     try {
-      localStorage.setItem("isOauthRedirect", true);
       await magic.oauth2.loginWithRedirect({
         provider: provider,
         redirectURI: new URL("/dashboard", window.location.origin).href,
       });
+      localStorage.setItem("isOauthRedirect", true);
     } catch (err) {
       console.error(err);
     }

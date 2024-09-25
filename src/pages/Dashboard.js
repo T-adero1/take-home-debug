@@ -22,7 +22,7 @@ const Dashboard = ({ logout, printMetadata, getMetadata, user, setUser }) => {
     } else {
       getMetadata();
     }
-  }, [finishSocialLogin, printMetadata]);
+  }, [finishSocialLogin, getMetadata]);
 
   return (
     <div className="container">
