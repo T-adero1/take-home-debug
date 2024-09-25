@@ -1,8 +1,7 @@
-import { useCallback } from "react";
-import { Routes, Route } from "react-router-dom";
+import { useCallback, useState } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { magic } from "./lib/magic";
-import { useNavigate, useState } from "react-router-dom";
-import Login from "./Login";
+import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 
 function App() {
@@ -55,6 +54,7 @@ function App() {
               logout={logout}
               setUser={setUser}
               printMetadata={printMetadata}
+              getMetadata={getMetadata}
             />
           } 
         />

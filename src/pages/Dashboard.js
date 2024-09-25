@@ -16,11 +16,11 @@ const Dashboard = ({ logout, printMetadata, getMetadata, user, setUser }) => {
   }, [setUser, navigate]);
 
   useEffect(() => {
-    if (localStorage.getItem('isRedirect')) {
+    if (localStorage.getItem('isOauthRedirect')) {
       finishSocialLogin();
-      localStorage.removeItem('isRedirect');
+      localStorage.removeItem('isOauthRedirect');
     } else {
-      printMetadata();
+      getMetadata();
     }
   }, [finishSocialLogin, printMetadata]);
 
@@ -28,7 +28,7 @@ const Dashboard = ({ logout, printMetadata, getMetadata, user, setUser }) => {
     <div className="container">
       {!user && <div className="loading">Loading...</div>}
 
-      {users && (
+      {user && (
         <>
         <div>
           <h1>Data returned:</h1>
