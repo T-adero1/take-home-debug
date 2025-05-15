@@ -74,3 +74,36 @@ button:hover {
   border-radius: 10px;
   overflow-x: scroll;
 }
+
+/* Network Selector styles */
+.network-selector {
+  margin: 20px 0;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.network-selector label {
+  font-weight: bold;
+}
+
+.network-selector select {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: white;
+  font-size: 14px;
+  min-width: 200px;
+}
+
+
+.status-message {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #e9ecef;
+  border-radius: 4px;
+  font-family: monospace;
+}

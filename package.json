@@ -4,8 +4,10 @@
   "private": true,
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@magic-ext/bitcoin": "^24.0.6",
     "@magic-ext/oauth2": "^9.10.0",
     "@magic-sdk/commons": "^24.10.0",
+    "ethers": "^5.7.2",
     "magic-sdk": "^28.10.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
