@@ -33,20 +33,6 @@ const Login = () => {
         } catch (tokenErr) {
           console.log("Could not get ID token:", tokenErr.message);
         }
-
-        // Try to get Bitcoin wallet address
-        try {
-          const btcAddress = await magic.bitcoin.getAccount();
-          console.log("Bitcoin wallet address:", btcAddress);
-        } catch (btcErr) {
-          console.log("Could not get Bitcoin address:", btcErr.message);
-        }
-      }
-
-      console.log(`=== END MAGIC STATE ${label} ===`);
-    } catch (err) {
-      console.error(`Error logging Magic state ${label}:`, err);
-    }
   };
 
   const handleEmailOtpLogin = useCallback(async () => {
