@@ -8,7 +8,7 @@ const Dashboard = ({ logout, printMetadata, getMetadata, user, setUser }) => {
   const finishSocialLogin = useCallback(async () => {
     try {
       const data = await magic.oauth2.getRedirectResult();
-      setUser(data.magic.userMetadata)
+      setUser(data.magic.userMetadata);
     } catch (err) {
       navigate("/");
       console.error(err);
@@ -16,9 +16,9 @@ const Dashboard = ({ logout, printMetadata, getMetadata, user, setUser }) => {
   }, [setUser, navigate]);
 
   useEffect(() => {
-    if (localStorage.getItem('isOauthRedirect')) {
+    if (localStorage.getItem("isOauthRedirect")) {
       finishSocialLogin();
-      localStorage.removeItem('isOauthRedirect');
+      localStorage.removeItem("isOauthRedirect");
     } else {
       getMetadata();
     }
@@ -30,18 +30,18 @@ const Dashboard = ({ logout, printMetadata, getMetadata, user, setUser }) => {
 
       {user && (
         <>
-        <div>
-          <h1>Data returned:</h1>
-          <pre className="user-info">{JSON.stringify(user, null, 3)}</pre>
-        </div>
-        <br />
-        <button className="logout-button" onClick={printMetadata}>
-          Print Metadata
-        </button>
-        <br />
-        <button className="logout-button" onClick={logout}>
-          Logout
-        </button>
+          <div>
+            <h1>Data returned:</h1>
+            <pre className="user-info">{JSON.stringify(user, null, 3)}</pre>
+          </div>
+          <br />
+          <button className="logout-button" onClick={printMetadata}>
+            Print Metadata
+          </button>
+          <br />
+          <button className="logout-button" onClick={logout}>
+            Logout
+          </button>
         </>
       )}
     </div>
