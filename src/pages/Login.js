@@ -1,10 +1,11 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaGoogle } from "react-icons/fa";
+import { FaGoogle, FaSms } from "react-icons/fa";
 import { magic } from "../lib/magic";
 
 const Login = () => {
   const navigate = useNavigate();
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   const logMagicState = async (label) => {
     try {
@@ -16,10 +17,14 @@ const Login = () => {
       console.log("Is logged in:", isLoggedIn);
 
       if (isLoggedIn) {
-        const metadata = await magic.user.getInfo();
-        console.log("Current user metadata:", metadata);
-        console.log("User email:", metadata.email);
-        console.log("User issuer:", metadata.issuer);
+        try {
+          const metadata = await magic.user.getInfo();
+          console.log("Current user metadata:", metadata);
+          console.log("User email:", metadata.email);
+          console.log("User issuer:", metadata.issuer);
+        } catch (metadataErr) {
+          console.error("Error getting user metadata:", metadataErr);
+        }
       } else {
         console.log("No current user session");
       }
@@ -71,6 +76,33 @@ const Login = () => {
     }
   }, []);
 
+  const handleSmsLogin = useCallback(async () => {
+    try {
+      if (!phoneNumber) {
+        alert("Please enter a phone number");
+        return;
+      }
+
+      await logMagicState("BEFORE SMS LOGIN");
+
+      const did = await magic.auth.loginWithSMS({
+        phoneNumber: phoneNumber,
+      });
+
+      await logMagicState("AFTER SMS LOGIN");
+
+      if (did) {
+        console.log(`DID Token: ${did}`);
+        const userInfo = await magic.user.getInfo();
+        console.log(`UserInfo:`, userInfo);
+        navigate("/dashboard");
+      }
+    } catch (err) {
+      console.error("SMS login error:", err);
+      await logMagicState("AFTER SMS LOGIN ERROR");
+    }
+  }, [phoneNumber, navigate]);
+
   return (
     <div className="container">
       <h1>Welcome to Magic</h1>
@@ -79,6 +111,25 @@ const Login = () => {
       <button onClick={() => handleSocialLogin("google")}>
         <FaGoogle size={"2.5rem"} />
         Log in with Google
+      </button>
+      <br />
+      <div style={{ marginTop: "20px", marginBottom: "10px" }}>
+        <input
+          type="tel"
+          placeholder="Enter phone number (e.g., +1234567890)"
+          value={phoneNumber}
+          onChange={(e) => setPhoneNumber(e.target.value)}
+          style={{
+            padding: "10px",
+            width: "250px",
+            marginBottom: "10px",
+            fontSize: "16px",
+          }}
+        />
+      </div>
+      <button onClick={handleSmsLogin}>
+        <FaSms size={"2.5rem"} />
+        Log in with SMS
       </button>
     </div>
   );
