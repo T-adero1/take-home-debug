@@ -26,14 +26,6 @@ function App() {
           // If logged in, try to get metadata
           const metadata = await magic.user.getInfo();
           console.log("  magic.user.getInfo():", metadata);
-          console.log("  User Metadata Extract:", {
-            publicAddress: metadata.publicAddress,
-            email: metadata.email,
-            issuer: metadata.issuer,
-            authUserId: metadata.authUserId || "not available",
-            authUserSessionToken:
-              metadata.authUserSessionToken || "not available",
-          });
           console.log("  [SUCCESS] Magic session persisted properly!");
 
           // Set user state and redirect to dashboard

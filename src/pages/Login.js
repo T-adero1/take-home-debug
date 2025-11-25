@@ -10,8 +10,6 @@ const Login = () => {
   const logMagicState = async (label) => {
     try {
       console.log(`=== MAGIC STATE ${label} ===`);
-      console.log("Magic instance:", magic);
-      console.log("Magic instance ID/reference:", magic.constructor.name);
 
       const isLoggedIn = await magic.user.isLoggedIn();
       console.log("Is logged in:", isLoggedIn);
@@ -19,24 +17,9 @@ const Login = () => {
       if (isLoggedIn) {
         try {
           const metadata = await magic.user.getInfo();
-          console.log("Current user metadata:", metadata);
-          console.log("User email:", metadata.email);
-          console.log("User issuer:", metadata.issuer);
+          console.log("User metadata:", metadata);
         } catch (metadataErr) {
           console.error("Error getting user metadata:", metadataErr);
-        }
-      } else {
-        console.log("No current user session");
-      }
-
-      // Try to get ID token if logged in
-      if (isLoggedIn) {
-        try {
-          const idToken = await magic.user.getIdToken();
-          console.log("Current ID token:", idToken);
-          console.log("ID token length:", idToken ? idToken.length : "null");
-        } catch (tokenErr) {
-          console.log("Could not get ID token:", tokenErr.message);
         }
       }
 

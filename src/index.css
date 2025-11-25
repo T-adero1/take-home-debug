@@ -28,7 +28,7 @@ h1 {
 
 button {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   background-color: white;
   color: #3c4043;
@@ -41,7 +41,9 @@ button {
   font-size: 1.8rem;
   width: 280px;
   height: 48px;
-  line-height: 0;
+  line-height: 1.2;
+  text-align: center;
+  gap: 8px;
 }
 
 button:hover {
